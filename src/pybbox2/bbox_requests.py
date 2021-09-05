@@ -20,7 +20,8 @@ class BboxRequests():
 
         self.session = requests.session()
         self.session.headers = {}
-        self.cookies = {}
+        self.session.cookies = {}
+        self.session.verify = True
 
     def url(self, api_path: str) -> str:
         return f'{self.api_host}/api/v1/{api_path}'
