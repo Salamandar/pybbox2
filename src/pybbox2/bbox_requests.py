@@ -51,6 +51,8 @@ class BboxRequests():
         return result.json()[0]
 
     def do_auth(self) -> requests.Response:
+        if not self.password:
+            raise RuntimeError('No password provided!')
         kind, api = BboxApiEndpoints.login
         url = self.url(api)
         result = self.session.request(kind, url, data={'password': self.password})
@@ -62,3 +64,6 @@ class BboxRequests():
     def get_token(self) -> str:
         result = self.request(*BboxApiEndpoints.get_token)
         return result.json()[0]['device']['token']
+
+    def __del__(self) -> None:
+        self.session.close()
