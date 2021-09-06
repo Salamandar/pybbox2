@@ -19,8 +19,6 @@ class BboxRequests():
         self.needs_auth = self.password is not None
 
         self.session = requests.session()
-        self.session.headers = {}
-        self.session.cookies = {}
         self.session.verify = True
 
     def url(self, api_path: str) -> str:
