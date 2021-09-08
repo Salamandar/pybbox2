@@ -29,8 +29,6 @@ class BboxRequests():
         url = self.url(path)
         data = data or {}
 
-        print(kind, path, data)
-
         # post needs a token.
         if kind == 'post':
             token = self.get_token()
