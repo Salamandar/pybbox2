@@ -45,7 +45,11 @@ class BboxRequests():
         if int(result.status_code/100) != 2:
             raise RuntimeError(f'Error for request at {url}: {result.text}')
 
-        return result.json()[0]
+        result = result.json()
+        if isinstance(result, list) and len(result) == 1:
+            return result[0]
+        else:
+            return result
 
     def do_auth(self) -> requests.Response:
         if not self.password:
@@ -60,7 +64,7 @@ class BboxRequests():
 
     def get_token(self) -> str:
         result = self.request(*BboxApiEndpoints.get_token)
-        return result.json()[0]['device']['token']
+        return result['device']['token']
 
     def __del__(self) -> None:
         self.session.close()

@@ -21,7 +21,7 @@ class Bbox(BboxRequests):
         return self.request(*BboxApiEndpoints.reboot)
 
     def get_all_connected_devices(self):
-        return self.request(*BboxApiEndpoints.get_all_connected_devices).json()['hosts']['list']
+        return self.request(*BboxApiEndpoints.get_all_connected_devices)['hosts']['list']
 
     def login(self):
         return self.do_auth()
