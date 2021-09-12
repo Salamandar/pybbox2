@@ -22,7 +22,7 @@ class BboxRequests():
         self.session.verify = True
 
     def url(self, api_path: str) -> str:
-        return f'{self.api_host}/api/v1/{api_path}'
+        return f'{self.api_host}/api/{api_path}'
 
     def request(self, kind: str, path: str, data: dict=None) -> requests.Response:
         assert kind in [ 'get', 'put', 'post', 'delete' ]

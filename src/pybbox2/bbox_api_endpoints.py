@@ -1,15 +1,15 @@
 
 class BboxApiEndpoints():
-    get_bbox_info               = ( 'get',  'device' )
-    set_display_luminosity      = ( 'put',  'device/display' )
-    reboot                      = ( 'post', 'device/reboot' )
-    get_token                   = ( 'get',  'device/token' )
-    get_all_connected_devices   = ( 'get', 'hosts' )
-    login                       = ( 'post', 'login' )
-    logout                      = ( 'post', 'logout' )
-    get_xdsl_info               = ( 'get', 'wan/xdsl' )
-    get_xdsl_stats              = ( 'get', 'wan/xdsl/stats' )
-    get_ip_stats                = ( 'get', 'wan/ip/stats' )
+    get_bbox_info               = ( 'get',  'v1/device' )
+    set_display_luminosity      = ( 'put',  'v1/device/display' )
+    reboot                      = ( 'post', 'v1/device/reboot' )
+    get_token                   = ( 'get',  'v1/device/token' )
+    get_all_connected_devices   = ( 'get',  'v1/hosts' )
+    login                       = ( 'post', 'v1/login' )
+    logout                      = ( 'post', 'v1/logout' )
+    get_xdsl_info               = ( 'get',  'v1/wan/xdsl' )
+    get_xdsl_stats              = ( 'get',  'v1/wan/xdsl/stats' )
+    get_ip_stats                = ( 'get',  'v1/wan/ip/stats' )
 
 'v1/airties'
 'v1/alerts'

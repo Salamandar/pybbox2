@@ -18,12 +18,17 @@ class TestBbox(unittest.TestCase):
 
     def test_url(self):
         box = pybbox2.Bbox(password=self.password)
-        url = box.url('api_endpoint')
+        url = box.url('v1/api_endpoint')
         self.assertEqual(url, 'https://mabbox.bytel.fr/api/v1/api_endpoint')
+
+    def test_url_v2(self):
+        box = pybbox2.Bbox(password=self.password)
+        url = box.url('v2/api_endpoint')
+        self.assertEqual(url, 'https://mabbox.bytel.fr/api/v2/api_endpoint')
 
     def test_custom_hostname(self):
         box = pybbox2.Bbox(api_host='http://1.1.1.1', password=self.password)
-        url = box.url('api_endpoint')
+        url = box.url('v1/api_endpoint')
         self.assertEqual(url, 'http://1.1.1.1/api/v1/api_endpoint')
 
 if __name__ == '__main__':
