@@ -8,9 +8,22 @@ It handles session cookies, but it's up to the user to:
 """
 
 import requests
-import time
+import ssl
+from requests.packages.urllib3 import poolmanager
 from .bbox_api_endpoints import BboxApiEndpoints
 
+class TLSAdapter(requests.adapters.HTTPAdapter):
+
+    def init_poolmanager(self, connections, maxsize, block=False):
+        """Create and initialize the urllib3 PoolManager."""
+        ctx = ssl.create_default_context()
+        ctx.set_ciphers('DEFAULT@SECLEVEL=1')
+        self.poolmanager = poolmanager.PoolManager(
+                num_pools=connections,
+                maxsize=maxsize,
+                block=block,
+                ssl_version=ssl.PROTOCOL_TLS,
+                ssl_context=ctx)
 class BboxRequests():
 
     def __init__(self, api_host: str=None, password: str=None) -> None:
@@ -19,13 +32,14 @@ class BboxRequests():
         self.needs_auth = self.password is not None
 
         self.session = requests.session()
+        self.session.mount('https://', TLSAdapter())
         self.session.verify = True
 
     def url(self, api_path: str) -> str:
         return f'{self.api_host}/api/{api_path}'
 
     def request(self, kind: str, path: str, data: dict=None) -> requests.Response:
-        assert kind in [ 'get', 'put', 'post', 'delete' ]
+        assert kind in ['get', 'put', 'post', 'delete']
         url = self.url(path)
         data = data or {}
 
